@@ -5,22 +5,33 @@ import {
   TouchableWithoutFeedback,
 } from "react-native-gesture-handler";
 
+import { Header } from "@react-navigation/elements";
+import { StatusBar } from "expo-status-bar";
+
 export default function RootLayout() {
   return (
-    <GestureHandlerRootView>
-      <Stack>
-        <Stack.Screen
-          name="index"
-          options={{
-            //When the icon is pressed it will sometimes not register visually and will very often not call the function
-            headerRight: () => (
-              <TouchableWithoutFeedback onPress={() => alert("it worked")}>
-                <MaterialCommunityIcons name="plus" size={30} />
-              </TouchableWithoutFeedback>
-            ),
-          }}
-        />
-      </Stack>
-    </GestureHandlerRootView>
+    <Stack>
+      <Stack.Screen
+        name="index"
+        options={{
+          //When the icon is pressed it will sometimes not register visually and will very often not call the function
+          header: () => (
+            <Header
+              title="test"
+              headerRight={() => (
+                <MaterialCommunityIcons
+                  style={{ marginRight: 20, alignSelf: "center" }}
+                  name="plus"
+                  onPress={() => {
+                    alert("it worked!");
+                  }}
+                  size={24}
+                />
+              )}
+            />
+          ),
+        }}
+      />
+    </Stack>
   );
 }
